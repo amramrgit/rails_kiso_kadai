@@ -1,11 +1,28 @@
-<h1>Talks#confirm</h1>
-<h3>確認画面。以下の内容で、送信する。</h3>
+<h1>Talks#confirm2</h1>
+<p>確認画面。以下の内容で、送信する。</p>
+
+<%= form_with(model: @talk, local: true) do |form| %>
+  <% if @talk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @talk.errors.count %>件のエラーがあります。</h2>
+      <h2>test</h2>
+      <ul>
+      <% @talk.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% else %>
+    <p> error無し判定 </p>  
+  <% end %>
+<% end %>
 
 <%= form_with(model: @talk, url: talks_path, local:true) do |form| %>
   <%= form.hidden_field :content %>
   <p>本文:<%= @talk.content %></p>
   <%= form.submit  "登録する" %>
 <% end %>
+
 
 <%= form_with(model:@talk, url:new_talk_path, local:true, method:'get') do |form| %>
   <%= form.hidden_field :content %>
